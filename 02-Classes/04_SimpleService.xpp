@@ -1,0 +1,25 @@
+class DevCustomerService
+{
+    public boolean validateCreditLimit(AmountCur _creditMax)
+    {
+        return _creditMax >= 0;
+    }
+
+    public str buildSummary(CustAccount _account, Name _name, AmountCur _creditMax)
+    {
+        return strFmt("Cuenta=%1 | Nombre=%2 | Crédito=%3", _account, _name, _creditMax);
+    }
+}
+
+class Dev10_SimpleService
+{
+    public static void main(Args _args)
+    {
+        DevCustomerService service = new DevCustomerService();
+
+        if (service.validateCreditLimit(10000))
+        {
+            info(service.buildSummary("US-020", "Litware", 10000));
+        }
+    }
+}

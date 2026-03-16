@@ -1,0 +1,18 @@
+class Dev05_CollectionsMap
+{
+    public static void main(Args _args)
+    {
+        Map discountMap = new Map(Types::String, Types::Integer);
+        MapEnumerator me;
+
+        discountMap.insert("RETAIL", 5);
+        discountMap.insert("WHOLESALE", 12);
+
+        me = discountMap.getEnumerator();
+
+        while (me.moveNext())
+        {
+            info(strFmt("Grupo: %1 | Descuento: %2%%", me.currentKey(), me.currentValue()));
+        }
+    }
+}

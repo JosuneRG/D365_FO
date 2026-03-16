@@ -1,0 +1,21 @@
+class Dev11_SelectFirstOnlyCustTable
+{
+    public static void main(Args _args)
+    {
+        CustTable custTable;
+
+        select firstOnly custTable
+            where custTable.AccountNum == "US-001";
+
+        if (custTable.RecId)
+        {
+            info(strFmt("Cliente encontrado: %1 - %2",
+                custTable.AccountNum,
+                custTable.name()));
+        }
+        else
+        {
+            warning("No se encontró el cliente");
+        }
+    }
+}

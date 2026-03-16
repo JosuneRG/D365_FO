@@ -1,0 +1,30 @@
+class DevCustomerContract
+{
+    CustAccount custAccount;
+    Name        custName;
+
+    public CustAccount parmCustAccount(CustAccount _custAccount = custAccount)
+    {
+        custAccount = _custAccount;
+        return custAccount;
+    }
+
+    public Name parmCustName(Name _custName = custName)
+    {
+        custName = _custName;
+        return custName;
+    }
+}
+
+class Dev08_ParmMethods
+{
+    public static void main(Args _args)
+    {
+        DevCustomerContract contract = new DevCustomerContract();
+
+        contract.parmCustAccount("US-010");
+        contract.parmCustName("Adventure Works");
+
+        info(strFmt("%1 - %2", contract.parmCustAccount(), contract.parmCustName()));
+    }
+}

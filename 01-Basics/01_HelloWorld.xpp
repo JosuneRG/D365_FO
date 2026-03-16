@@ -1,0 +1,7 @@
+class Dev01_HelloWorld
+{
+    public static void main(Args _args)
+    {
+        info("Hola desde X++ en D365FO");
+    }
+}

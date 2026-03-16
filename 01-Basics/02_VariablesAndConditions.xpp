@@ -1,0 +1,20 @@
+class Dev02_VariablesAndConditions
+{
+    public static void main(Args _args)
+    {
+        int amount = 1500;
+        str customerGroup = "10";
+        boolean isApproved;
+
+        isApproved = amount >= 1000;
+
+        if (isApproved)
+        {
+            info(strFmt("Importe %1 aprobado para el grupo %2", amount, customerGroup));
+        }
+        else
+        {
+            warning(strFmt("Importe %1 no aprobado", amount));
+        }
+    }
+}

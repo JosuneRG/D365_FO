@@ -1,0 +1,19 @@
+class Dev04_CollectionsList
+{
+    public static void main(Args _args)
+    {
+        List customerList = new List(Types::String);
+        ListEnumerator le;
+
+        customerList.addEnd("US-001");
+        customerList.addEnd("US-002");
+        customerList.addEnd("US-003");
+
+        le = customerList.getEnumerator();
+
+        while (le.moveNext())
+        {
+            info(strFmt("Cliente: %1", le.current()));
+        }
+    }
+}

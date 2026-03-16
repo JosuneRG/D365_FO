@@ -1,0 +1,21 @@
+class DevStringHelper
+{
+    public static str toUpperCase(str _value)
+    {
+        return strUpr(_value);
+    }
+
+    public static str buildCustomerLabel(CustAccount _account, Name _name)
+    {
+        return strFmt("%1 :: %2", _account, _name);
+    }
+}
+
+class Dev09_StaticHelper
+{
+    public static void main(Args _args)
+    {
+        info(DevStringHelper::toUpperCase("d365 fo"));
+        info(DevStringHelper::buildCustomerLabel("US-005", "Fourth Coffee"));
+    }
+}

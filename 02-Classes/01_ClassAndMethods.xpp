@@ -1,0 +1,25 @@
+class DevCustomerInfo
+{
+    CustAccount custAccount;
+    Name        custName;
+
+    public void new(CustAccount _custAccount, Name _custName)
+    {
+        custAccount = _custAccount;
+        custName    = _custName;
+    }
+
+    public void printInfo()
+    {
+        info(strFmt("Cuenta: %1 | Nombre: %2", custAccount, custName));
+    }
+}
+
+class Dev07_ClassWithConstructor
+{
+    public static void main(Args _args)
+    {
+        DevCustomerInfo customerInfo = new DevCustomerInfo("US-001", "Contoso Retail");
+        customerInfo.printInfo();
+    }
+}
