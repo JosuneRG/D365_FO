@@ -1,18 +1,41 @@
-class Dev04_CollectionsList
+// Qué tienes que entender:
+// - List = colección dinámica (como un array que puede crecer)
+// - Types::String = indica que la lista guarda texto
+// - addEnd() = añade un elemento al final de la lista
+// - ListEnumerator = objeto para recorrer la lista
+// - getEnumerator() = obtiene el enumerador
+// - moveNext() = avanza al siguiente elemento (true si hay más)
+// - current() = obtiene el valor actual del recorrido
+// - while = se usa para recorrer colecciones
+// - info() = muestra mensaje en pantalla
+// - strFmt() = formatea texto con variables
+
+/// <summary>
+/// Ejercicio - Uso de List y Enumerator.
+/// Crea una lista de clientes y recorre sus valores.
+/// </summary>
+class Dev_CollectionsList
 {
     public static void main(Args _args)
     {
+        // Creamos una lista que almacenará strings
         List customerList = new List(Types::String);
+
+        // Declaramos el enumerador (para recorrer la lista)
         ListEnumerator le;
 
+        // Añadimos elementos a la lista
         customerList.addEnd("US-001");
         customerList.addEnd("US-002");
         customerList.addEnd("US-003");
 
+        // Obtenemos el enumerador de la lista
         le = customerList.getEnumerator();
 
+        // Recorremos la lista elemento por elemento
         while (le.moveNext())
         {
+            // current() devuelve el valor actual
             info(strFmt("Cliente: %1", le.current()));
         }
     }

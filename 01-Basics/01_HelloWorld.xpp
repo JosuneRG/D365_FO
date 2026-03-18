@@ -1,7 +1,18 @@
-class Dev01_HelloWorld
+// Qué tienes que entender:
+// - class = defines una clase
+// - main = punto de entrada del programa
+// - Args = objeto que recibe parámetros (no lo usamos aquí)
+// - info() = muestra mensaje en pantalla (Infolog)
+
+/// <summary>
+/// Ejercicio 01 - Hello World.
+/// Muestra un mensaje básico en pantalla.
+/// </summary>
+class Dev_HelloWorld
 {
     public static void main(Args _args)
     {
+        // info() muestra un mensaje en pantalla (Infolog de D365)
         info("Hola desde X++ en D365FO");
     }
 }

@@ -1,0 +1,23 @@
+// Qué tienes que entender:
+// - DataEventHandler = método que escucha eventos de tabla
+// - ValidatedWrite = se lanza al validar antes de guardar
+// - sender = registro que dispara el evento
+// - cast = convertir Common a CustTable
+
+/// <summary>
+/// Handler de evento sobre CustTable.
+/// Valida que el crédito no sea negativo.
+/// </summary>
+class CustTable_Dev_DataEventHandler
+{
+    [DataEventHandler(tableStr(CustTable), DataEventType::ValidatedWrite)]
+    public static void CustTable_onValidatedWrite(Common _sender, DataEventArgs _e)
+    {
+        CustTable custTable = _sender as CustTable;
+
+        if (custTable && custTable.CreditMax < 0)
+        {
+            throw error("El crédito máximo no puede ser negativo.");
+        }
+    }
+}

@@ -1,0 +1,50 @@
+// Qué tienes que entender:
+// - insert() = inserta un registro
+// - update() = actualiza un registro
+// - delete() = elimina un registro
+// - forUpdate = permite modificar el registro
+// - ttsBegin / ttsCommit = transacción
+// - clear() = limpia el buffer antes de usarlo
+
+/// <summary>
+/// Ejercicio 04 - Insert, Update y Delete.
+/// Ejemplo CRUD usando una tabla custom.
+/// </summary>
+class Dev04_InsertUpdateDelete
+{
+    public static void main(Args _args)
+    {
+        DevTrainingTable devTrainingTable;
+
+        ttsBegin;
+
+        // INSERT
+        devTrainingTable.clear();
+        devTrainingTable.TrainingId  = "TRN-001";
+        devTrainingTable.Description = "Registro inicial";
+        devTrainingTable.insert();
+
+        // UPDATE
+        select forUpdate firstOnly devTrainingTable
+            where devTrainingTable.TrainingId == "TRN-001";
+
+        if (devTrainingTable.RecId)
+        {
+            devTrainingTable.Description = "Registro actualizado";
+            devTrainingTable.update();
+        }
+
+        // DELETE
+        select forUpdate firstOnly devTrainingTable
+            where devTrainingTable.TrainingId == "TRN-001";
+
+        if (devTrainingTable.RecId)
+        {
+            devTrainingTable.delete();
+        }
+
+        ttsCommit;
+
+        info("Proceso Insert/Update/Delete completado");
+    }
+}

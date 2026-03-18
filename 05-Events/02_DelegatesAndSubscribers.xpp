@@ -1,0 +1,55 @@
+// Qué tienes que entender:
+// - delegate = evento personalizado
+// - subscriber = clase que escucha ese evento
+// - += eventHandler(...) = suscripción al evento
+// - este patrón desacopla el código
+
+/// <summary>
+/// Clase que lanza un delegate al terminar un proceso.
+/// </summary>
+class DevProcessNotifier
+{
+    delegate void processFinished(str _message)
+    {
+    }
+
+    public void run()
+    {
+        // Aquí iría la lógica real
+        this.processFinished("Proceso terminado correctamente");
+    }
+}
+
+/// <summary>
+/// Clase suscriptora del delegate.
+/// </summary>
+class DevProcessSubscriber
+{
+    public void subscribeAndRun()
+    {
+        DevProcessNotifier notifier = new DevProcessNotifier();
+
+        // Nos suscribimos al evento
+        notifier.processFinished += eventHandler(this.handleProcessFinished);
+
+        // Lanzamos el proceso
+        notifier.run();
+    }
+
+    public void handleProcessFinished(str _message)
+    {
+        info(strFmt("Evento recibido: %1", _message));
+    }
+}
+
+/// <summary>
+/// Clase runnable para probar delegate y subscriber.
+/// </summary>
+class Dev_RunDelegateExample
+{
+    public static void main(Args _args)
+    {
+        DevProcessSubscriber subscriber = new DevProcessSubscriber();
+        subscriber.subscribeAndRun();
+    }
+}

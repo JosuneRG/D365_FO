@@ -1,0 +1,26 @@
+// Qué tienes que entender:
+// - update_recordset = actualización masiva directa en SQL
+// - mucho más eficiente que while select
+// - se usa siempre que no necesites lógica por registro
+
+/// <summary>
+/// Job - Actualización optimizada.
+/// Usa update_recordset para mejorar rendimiento.
+/// </summary>
+class Dev_Job_UpdateRecordsetBestPractice
+{
+    public static void main(Args _args)
+    {
+        CustTable custTable;
+
+        ttsBegin;
+
+        update_recordset custTable
+            setting CreditMax = custTable.CreditMax + 100
+            where custTable.Blocked == CustVendorBlocked::No;
+
+        ttsCommit;
+
+        info("Actualización optimizada completada");
+    }
+}

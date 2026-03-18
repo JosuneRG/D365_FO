@@ -1,0 +1,48 @@
+// Qué tienes que entender:
+// - posting pattern = separar proceso en pasos
+// - validate / process / post = flujo típico
+// - ayuda a que la lógica sea más clara y mantenible
+
+/// <summary>
+/// Servicio con estructura tipo posting.
+/// </summary>
+class DevPostingService
+{
+    /// <summary>
+    /// Ejecuta el flujo completo.
+    /// </summary>
+    /// <param name="_account">Cuenta del cliente</param>
+    public void run(CustAccount _account)
+    {
+        this.validate(_account);
+        this.process(_account);
+        this.post(_account);
+    }
+
+    /// <summary>
+    /// Valida la entrada.
+    /// </summary>
+    private void validate(CustAccount _account)
+    {
+        if (_account == "")
+        {
+            throw error("Cuenta inválida");
+        }
+    }
+
+    /// <summary>
+    /// Simula el procesado.
+    /// </summary>
+    private void process(CustAccount _account)
+    {
+        info(strFmt("Procesando %1", _account));
+    }
+
+    /// <summary>
+    /// Simula el posteo final.
+    /// </summary>
+    private void post(CustAccount _account)
+    {
+        info(strFmt("Posteando %1", _account));
+    }
+}

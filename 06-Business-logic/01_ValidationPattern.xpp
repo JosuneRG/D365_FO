@@ -1,0 +1,26 @@
+// Qué tienes que entender:
+// - validation pattern = separar validaciones en una clase
+// - return true/false = indicar si algo es válido
+// - error() = muestra error al usuario
+
+/// <summary>
+/// Servicio de validación.
+/// </summary>
+class DevValidationService
+{
+    /// <summary>
+    /// Valida que un importe no sea negativo.
+    /// </summary>
+    /// <param name="_amount">Importe a validar</param>
+    /// <returns>True si es válido</returns>
+    public boolean validateCredit(AmountCur _amount)
+    {
+        if (_amount < 0)
+        {
+            error("El crédito no puede ser negativo");
+            return false;
+        }
+
+        return true;
+    }
+}

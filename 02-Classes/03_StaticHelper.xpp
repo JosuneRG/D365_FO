@@ -1,4 +1,4 @@
-class DevStringHelper
+class Dev_StringHelper
 {
     public static str toUpperCase(str _value)
     {
@@ -17,5 +17,47 @@ class Dev09_StaticHelper
     {
         info(DevStringHelper::toUpperCase("d365 fo"));
         info(DevStringHelper::buildCustomerLabel("US-005", "Fourth Coffee"));
+    }
+}// Qué tienes que entender:
+// - static = método de clase, no necesitas crear objeto
+// - helper = clase utilitaria con funciones pequeñas reutilizables
+// - strUpr() = convierte texto a mayúsculas
+
+/// <summary>
+/// Clase helper con métodos estáticos de utilidad.
+/// </summary>
+class DevStringHelper
+{
+    /// <summary>
+    /// Convierte un texto a mayúsculas.
+    /// </summary>
+    /// <param name="_value">Texto de entrada</param>
+    /// <returns>Texto en mayúsculas</returns>
+    public static str toUpperCase(str _value)
+    {
+        return strUpr(_value);
+    }
+
+    /// <summary>
+    /// Construye una etiqueta de cliente.
+    /// </summary>
+    /// <param name="_account">Cuenta</param>
+    /// <param name="_name">Nombre</param>
+    /// <returns>Etiqueta formateada</returns>
+    public static str buildLabel(CustAccount _account, Name _name)
+    {
+        return strFmt("%1 - %2", _account, _name);
+    }
+}
+
+/// <summary>
+/// Clase runnable para probar el helper.
+/// </summary>
+class Dev03_StaticHelper
+{
+    public static void main(Args _args)
+    {
+        info(DevStringHelper::toUpperCase("d365 fo"));
+        info(DevStringHelper::buildLabel("US-003", "Litware"));
     }
 }

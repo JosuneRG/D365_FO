@@ -1,12 +1,24 @@
-class Dev11_SelectFirstOnlyCustTable
+// Qué tienes que entender:
+// - CustTable = tabla estándar de clientes
+// - select = consulta a base de datos
+// - firstOnly = trae solo un registro
+// - RecId = si tiene valor, el registro existe
+
+/// <summary>
+/// Ejercicio 01 - Select firstOnly.
+/// Busca un cliente por su cuenta.
+/// </summary>
+class Dev01_SelectFirstOnlyCustTable
 {
     public static void main(Args _args)
     {
         CustTable custTable;
 
+        // Buscamos un único registro
         select firstOnly custTable
             where custTable.AccountNum == "US-001";
 
+        // Si RecId tiene valor, encontró algo
         if (custTable.RecId)
         {
             info(strFmt("Cliente encontrado: %1 - %2",

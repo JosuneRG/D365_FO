@@ -1,0 +1,29 @@
+// Qué tienes que entender:
+// - Chain of Command (CoC) = ampliar lógica estándar
+// - next = llama a la lógica original
+// - puedes meter lógica antes o después de next
+// - validateWrite() se usa para validar antes de guardar
+
+/// <summary>
+/// Chain of Command sobre SalesTable.
+/// Añade validación extra.
+/// </summary>
+[ExtensionOf(tableStr(SalesTable))]
+final class SalesTable_Dev_CoCExtension
+{
+    public boolean validateWrite()
+    {
+        boolean ret;
+
+        // Ejecutamos primero la lógica estándar
+        ret = next validateWrite();
+
+        // Si el estándar fue bien, añadimos nuestra validación
+        if (ret && this.CustAccount == "")
+        {
+            ret = checkFailed("La cuenta de cliente es obligatoria.");
+        }
+
+        return ret;
+    }
+}

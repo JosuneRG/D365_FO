@@ -1,30 +1,54 @@
-class DevCustomerContract
-{
-    CustAccount custAccount;
-    Name        custName;
+// Qué tienes que entender:
+// - constructor (new) = inicializa la clase
+// - parm methods = patrón estándar en D365
+// - _param = convención de nombre de parámetros
+// - método con valor por defecto = getter/setter
 
-    public CustAccount parmCustAccount(CustAccount _custAccount = custAccount)
+/// <summary>
+/// Clase con constructor y parm methods.
+/// </summary>
+class DevCustomerParm
+{
+    CustAccount account;
+    Name name;
+
+    /// <summary>
+    /// Constructor de la clase.
+    /// </summary>
+    public void new(CustAccount _account, Name _name)
     {
-        custAccount = _custAccount;
-        return custAccount;
+        account = _account;
+        name = _name;
     }
 
-    public Name parmCustName(Name _custName = custName)
+    /// <summary>
+    /// Getter/Setter de account.
+    /// </summary>
+    public CustAccount parmAccount(CustAccount _account = account)
     {
-        custName = _custName;
-        return custName;
+        account = _account;
+        return account;
+    }
+
+    /// <summary>
+    /// Getter/Setter de name.
+    /// </summary>
+    public Name parmName(Name _name = name)
+    {
+        name = _name;
+        return name;
     }
 }
 
-class Dev08_ParmMethods
+/// <summary>
+/// Clase runnable.
+/// </summary>
+class Dev02_ConstructorAndParmMethods
 {
     public static void main(Args _args)
     {
-        DevCustomerContract contract = new DevCustomerContract();
+        DevCustomerParm c = new DevCustomerParm("US-002", "Fabrikam");
 
-        contract.parmCustAccount("US-010");
-        contract.parmCustName("Adventure Works");
-
-        info(strFmt("%1 - %2", contract.parmCustAccount(), contract.parmCustName()));
+        info(strFmt("%1 - %2", c.parmAccount(), c.parmName()));
     }
 }

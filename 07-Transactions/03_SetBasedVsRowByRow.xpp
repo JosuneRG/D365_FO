@@ -1,0 +1,45 @@
+// Qué tienes que entender:
+// - try = intenta ejecutar código
+// - catch = captura errores
+// - throw error(...) = lanza un error
+// - usar try/catch con transacciones es muy habitual
+// - si ocurre un error, la transacción no debe completarse
+
+/// <summary>
+/// Ejercicio 02 - Transacción con try/catch.
+/// Actualiza un cliente controlando errores.
+/// </summary>
+class Dev02_TryCatchTransaction
+{
+    public static void main(Args _args)
+    {
+        CustTable custTable;
+
+        try
+        {
+            ttsBegin;
+
+            // Buscamos cliente para modificar
+            select forUpdate firstOnly custTable
+                where custTable.AccountNum == "US-001";
+
+            // Si no existe, lanzamos error
+            if (!custTable.RecId)
+            {
+                throw error("Cliente no encontrado");
+            }
+
+            // Actualizamos crédito
+            custTable.CreditMax += 250;
+            custTable.update();
+
+            ttsCommit;
+
+            info("Transacción completada correctamente");
+        }
+        catch
+        {
+            error("Se produjo un error y la transacción no se completó");
+        }
+    }
+}

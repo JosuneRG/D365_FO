@@ -1,0 +1,61 @@
+// Qué tienes que entender:
+// - job = clase runnable para pruebas rápidas
+// - debugging = leer datos, validar, mostrar mensajes
+// - select firstOnly = trae un solo registro
+// - warning() = mensaje de aviso
+// - error() = mensaje de error
+// - info() = mensaje informativo
+// - este tipo de job se usa mucho para comprobar datos en desarrollo
+
+/// <summary>
+/// Job de debugging.
+/// Lee un cliente, valida algunos datos y muestra mensajes en el infolog.
+/// </summary>
+class Dev01_DebuggingJob_ReadAndValidate
+{
+    public static void main(Args _args)
+    {
+        CustTable custTable;
+        CustAccount accountToFind = "US-001";
+
+        // Buscamos un cliente concreto
+        select firstOnly custTable
+            where custTable.AccountNum == accountToFind;
+
+        // Validamos si existe
+        if (!custTable.RecId)
+        {
+            error(strFmt("No se encontró el cliente %1", accountToFind));
+            return;
+        }
+
+        // Mostramos datos principales
+        info(strFmt("Cliente encontrado: %1 - %2",
+            custTable.AccountNum,
+            custTable.name()));
+
+        // Validación simple del crédito
+        if (custTable.CreditMax < 0)
+        {
+            error("El crédito es negativo. Revisar datos.");
+        }
+        else if (custTable.CreditMax == 0)
+        {
+            warning("El cliente tiene crédito 0.");
+        }
+        else
+        {
+            info(strFmt("Crédito válido: %1", custTable.CreditMax));
+        }
+
+        // Validación simple de bloqueo
+        if (custTable.Blocked != CustVendorBlocked::No)
+        {
+            warning(strFmt("El cliente %1 está bloqueado", custTable.AccountNum));
+        }
+        else
+        {
+            info("El cliente no está bloqueado.");
+        }
+    }
+}

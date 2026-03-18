@@ -1,0 +1,26 @@
+// Qué tienes que entender:
+// - exists join = comprueba que exista un registro relacionado
+// - SalesTable = pedidos de venta
+// - join = relacionar tablas
+// - este patrón se usa mucho en D365FO
+
+/// <summary>
+/// Ejercicio 03 - Exists join.
+/// Muestra pedidos que tienen cliente relacionado.
+/// </summary>
+class Dev03_ExistsJoin
+{
+    public static void main(Args _args)
+    {
+        SalesTable salesTable;
+
+        while select SalesId, CustAccount from salesTable
+            exists join CustTable
+                where CustTable.AccountNum == salesTable.CustAccount
+        {
+            info(strFmt("Pedido: %1 | Cliente: %2",
+                salesTable.SalesId,
+                salesTable.CustAccount));
+        }
+    }
+}

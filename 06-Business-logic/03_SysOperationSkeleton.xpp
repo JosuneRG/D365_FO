@@ -1,0 +1,58 @@
+// Qué tienes que entender:
+// - SysOperation = framework para procesos/batch
+// - DataContract = clase de parámetros
+// - DataMember = parámetro visible para el framework
+// - Service = clase que ejecuta la lógica
+// - Controller = clase que arranca el proceso
+
+/// <summary>
+/// Contrato de datos para SysOperation.
+/// </summary>
+[DataContract]
+class DevContract
+{
+    CustAccount custAccount;
+
+    /// <summary>
+    /// Parm method del contrato.
+    /// </summary>
+    /// <param name="_custAccount">Cuenta cliente</param>
+    /// <returns>Cuenta actual</returns>
+    [DataMember]
+    public CustAccount parmCustAccount(CustAccount _custAccount = custAccount)
+    {
+        custAccount = _custAccount;
+        return custAccount;
+    }
+}
+
+/// <summary>
+/// Servicio que procesa el contrato.
+/// </summary>
+class DevService
+{
+    /// <summary>
+    /// Procesa el cliente recibido en el contrato.
+    /// </summary>
+    /// <param name="_contract">Contrato con parámetros</param>
+    public void process(DevContract _contract)
+    {
+        info(strFmt("Procesando cliente %1", _contract.parmCustAccount()));
+    }
+}
+
+/// <summary>
+/// Controller que lanza el proceso SysOperation.
+/// </summary>
+class DevController extends SysOperationServiceController
+{
+    public static void main(Args _args)
+    {
+        DevController controller = new DevController(
+            classStr(DevService),
+            methodStr(DevService, process)
+        );
+
+        controller.startOperation();
+    }
+}

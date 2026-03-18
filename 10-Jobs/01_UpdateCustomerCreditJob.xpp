@@ -1,0 +1,49 @@
+// Qué tienes que entender:
+// - job = clase runnable para pruebas rápidas
+// - CustTable = tabla estándar de clientes
+// - select forUpdate = permite modificar el registro
+// - where = filtro de la consulta
+// - ttsBegin / ttsCommit = transacción
+// - update() = guarda cambios en la base de datos
+// - RecId = indica si el registro existe
+// - += = suma valor al campo
+
+/// <summary>
+/// Job - Actualizar crédito de un cliente.
+/// Incrementa el crédito máximo de un cliente específico.
+/// </summary>
+class Dev_Job_UpdateCustomerCredit
+{
+    public static void main(Args _args)
+    {
+        CustTable custTable;
+
+        // Iniciamos transacción
+        ttsBegin;
+
+        // Buscamos el cliente y lo bloqueamos para edición
+        select forUpdate firstOnly custTable
+            where custTable.AccountNum == "US-001";
+
+        // Validamos que exista el cliente
+        if (custTable.RecId)
+        {
+            // Incrementamos el crédito
+            custTable.CreditMax += 1000;
+
+            // Guardamos cambios
+            custTable.update();
+
+            info(strFmt("Nuevo crédito para %1: %2",
+                custTable.AccountNum,
+                custTable.CreditMax));
+        }
+        else
+        {
+            warning("Cliente no encontrado");
+        }
+
+        // Confirmamos transacción
+        ttsCommit;
+    }
+}

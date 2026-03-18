@@ -1,0 +1,21 @@
+// Qué tienes que entender:
+// - también se pueden extender clases
+// - classStr() referencia una clase
+// - en D365FO moderno se usa extensibilidad, no overlayering
+
+/// <summary>
+/// Extensión de una clase helper custom.
+/// </summary>
+[ExtensionOf(classStr(DevStringHelper))]
+final class DevStringHelper_Extension
+{
+    /// <summary>
+    /// Devuelve un texto entre corchetes.
+    /// </summary>
+    /// <param name="_value">Texto de entrada</param>
+    /// <returns>Texto decorado</returns>
+    public static str decorate(str _value)
+    {
+        return strFmt("[%1]", _value);
+    }
+}

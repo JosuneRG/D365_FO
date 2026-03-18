@@ -1,0 +1,21 @@
+// Qué tienes que entender:
+// - SysTestCase = clase base para tests en X++
+// - SysTestMethod = atributo que marca un método como test
+// - assertEquals() = comprueba que un valor sea igual a otro
+// - testing = validar que el código hace lo esperado
+
+/// <summary>
+/// Ejercicio 01 - Test básico con SysTest.
+/// Comprueba una suma simple.
+/// </summary>
+class Dev01_SysTestExample extends SysTestCase
+{
+    [SysTestMethod]
+    public void testSum()
+    {
+        int result = 2 + 3;
+
+        // Verifica que el resultado sea 5
+        this.assertEquals(5, result, "La suma debería ser 5");
+    }
+}

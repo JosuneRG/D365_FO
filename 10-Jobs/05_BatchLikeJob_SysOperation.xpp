@@ -1,0 +1,99 @@
+// Qué tienes que entender:
+// - SysOperation = framework para procesos ejecutables y batch
+// - DataContract = parámetros del proceso
+// - DataMember = parámetro visible para el framework
+// - Service = lógica del proceso
+// - Controller = arranca el proceso
+// - esto ya se parece a desarrollo real en D365FO
+
+/// <summary>
+/// Contrato del proceso.
+/// Define los parámetros que recibirá el job tipo batch.
+/// </summary>
+[DataContract]
+class DevBatchContract
+{
+    CustAccount custAccount;
+    AmountCur   incrementAmount;
+
+    /// <summary>
+    /// Cuenta del cliente a procesar.
+    /// </summary>
+    /// <param name="_custAccount">Cuenta cliente</param>
+    /// <returns>Cuenta actual</returns>
+    [DataMember]
+    public CustAccount parmCustAccount(CustAccount _custAccount = custAccount)
+    {
+        custAccount = _custAccount;
+        return custAccount;
+    }
+
+    /// <summary>
+    /// Importe a incrementar en el crédito.
+    /// </summary>
+    /// <param name="_incrementAmount">Importe a sumar</param>
+    /// <returns>Importe actual</returns>
+    [DataMember]
+    public AmountCur parmIncrementAmount(AmountCur _incrementAmount = incrementAmount)
+    {
+        incrementAmount = _incrementAmount;
+        return incrementAmount;
+    }
+}
+
+/// <summary>
+/// Servicio del proceso.
+/// Contiene la lógica de negocio real.
+/// </summary>
+class DevBatchService
+{
+    /// <summary>
+    /// Ejecuta el proceso de actualización de crédito.
+    /// </summary>
+    /// <param name="_contract">Contrato con parámetros</param>
+    public void process(DevBatchContract _contract)
+    {
+        CustTable custTable;
+
+        ttsBegin;
+
+        // Buscamos el cliente para actualizarlo
+        select forUpdate firstOnly custTable
+            where custTable.AccountNum == _contract.parmCustAccount();
+
+        if (!custTable.RecId)
+        {
+            ttsAbort;
+            throw error(strFmt("No se encontró el cliente %1", _contract.parmCustAccount()));
+        }
+
+        // Actualizamos el crédito
+        custTable.CreditMax += _contract.parmIncrementAmount();
+        custTable.update();
+
+        ttsCommit;
+
+        info(strFmt("Cliente %1 actualizado. Nuevo crédito: %2",
+            custTable.AccountNum,
+            custTable.CreditMax));
+    }
+}
+
+/// <summary>
+/// Controller del proceso.
+/// Se encarga de lanzar el servicio.
+/// </summary>
+class DevBatchController extends SysOperationServiceController
+{
+    public static void main(Args _args)
+    {
+        DevBatchController controller;
+
+        controller = new DevBatchController(
+            classStr(DevBatchService),
+            methodStr(DevBatchService, process)
+        );
+
+        controller.startOperation();
+    }
+}

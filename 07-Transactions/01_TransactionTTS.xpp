@@ -1,0 +1,42 @@
+// Qué tienes que entender:
+// - ttsBegin = inicia una transacción
+// - ttsCommit = confirma la transacción
+// - transacción = bloque de cambios que se guardan juntos
+// - forUpdate = permite modificar el registro seleccionado
+// - update() = guarda cambios en el registro
+// - si no haces ttsCommit, los cambios no se consolidan igual que en un flujo normal
+
+/// <summary>
+/// Ejercicio 01 - Transacción básica con TTS.
+/// Busca un cliente y aumenta su crédito.
+/// </summary>
+class Dev01_TransactionTTS
+{
+    public static void main(Args _args)
+    {
+        CustTable custTable;
+
+        // Empezamos la transacción
+        ttsBegin;
+
+        // Buscamos el cliente y lo bloqueamos para edición
+        select forUpdate firstOnly custTable
+            where custTable.AccountNum == "US-001";
+
+        // Si existe, lo actualizamos
+        if (custTable.RecId)
+        {
+            custTable.CreditMax += 500;
+            custTable.update();
+
+            info(strFmt("Nuevo crédito: %1", custTable.CreditMax));
+        }
+        else
+        {
+            warning("Cliente no encontrado");
+        }
+
+        // Confirmamos la transacción
+        ttsCommit;
+    }
+}

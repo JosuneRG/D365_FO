@@ -1,25 +1,43 @@
-class DevCustomerInfo
+// Qué tienes que entender:
+// - class = define un objeto
+// - variables dentro de la clase = propiedades
+// - método = función dentro de la clase
+// - new = crear una instancia (objeto)
+// - this = referencia al objeto actual
+
+/// <summary>
+/// Ejercicio - Clase con propiedades y método.
+/// Representa un cliente simple.
+/// </summary>
+class DevCustomer
 {
-    CustAccount custAccount;
-    Name        custName;
+    CustAccount account;
+    Name name;
 
-    public void new(CustAccount _custAccount, Name _custName)
+    /// <summary>
+    /// Muestra los datos del cliente.
+    /// </summary>
+    public void print()
     {
-        custAccount = _custAccount;
-        custName    = _custName;
-    }
-
-    public void printInfo()
-    {
-        info(strFmt("Cuenta: %1 | Nombre: %2", custAccount, custName));
+        info(strFmt("%1 - %2", account, name));
     }
 }
 
-class Dev07_ClassWithConstructor
+/// <summary>
+/// Clase runnable para probar DevCustomer.
+/// </summary>
+class Dev01_ClassAndMethods
 {
     public static void main(Args _args)
     {
-        DevCustomerInfo customerInfo = new DevCustomerInfo("US-001", "Contoso Retail");
-        customerInfo.printInfo();
+        // Creamos objeto
+        DevCustomer c = new DevCustomer();
+
+        // Asignamos valores
+        c.account = "US-001";
+        c.name = "Contoso";
+
+        // Ejecutamos método
+        c.print();
     }
 }

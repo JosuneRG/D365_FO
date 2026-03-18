@@ -1,20 +1,36 @@
+// Qué tienes que entender:
+// - int = número entero
+// - boolean = true/false
+// - if = condición
+// - >= = mayor o igual
+// - strFmt() = formatea texto con variables
+// - %1 = placeholder
+
+/// <summary>
+/// Ejercicio 02 - Variables y condiciones.
+/// Muestra cómo usar variables y lógica condicional.
+/// </summary>
 class Dev02_VariablesAndConditions
 {
     public static void main(Args _args)
     {
+        // Declaramos una variable entera
         int amount = 1500;
-        str customerGroup = "10";
+
+        // Variable booleana (true o false)
         boolean isApproved;
 
+        // Condición: si amount es mayor o igual a 1000 → true
         isApproved = amount >= 1000;
 
+        // if = si se cumple la condición
         if (isApproved)
         {
-            info(strFmt("Importe %1 aprobado para el grupo %2", amount, customerGroup));
+            info(strFmt("Aprobado: %1", amount));
         }
         else
         {
-            warning(strFmt("Importe %1 no aprobado", amount));
+            warning(strFmt("No aprobado: %1", amount));
         }
     }
 }

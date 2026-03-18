@@ -1,0 +1,30 @@
+// Qué tienes que entender:
+// - while select = recorre múltiples registros
+// - forUpdate = permite actualizar cada registro
+// - loop sobre datos = cuidado con rendimiento
+
+/// <summary>
+/// Job - Actualización múltiple.
+/// Incrementa el crédito de todos los clientes activos.
+/// </summary>
+class Dev_Job_UpdateMultipleCustomers
+{
+    public static void main(Args _args)
+    {
+        CustTable custTable;
+
+        ttsBegin;
+
+        // Recorremos clientes no bloqueados
+        while select forUpdate custTable
+            where custTable.Blocked == CustVendorBlocked::No
+        {
+            custTable.CreditMax += 100;
+            custTable.update();
+        }
+
+        ttsCommit;
+
+        info("Actualización masiva completada");
+    }
+}

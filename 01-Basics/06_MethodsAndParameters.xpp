@@ -1,18 +1,48 @@
-class Dev06_MethodsAndParameters
+// Qué tienes que entender:
+// - método = bloque de código reutilizable
+// - parámetros (_a, _b) = valores que recibe el método
+// - return = devuelve un valor
+// - static = no necesitas crear un objeto para usar el método
+// - :: = operador para llamar métodos estáticos
+// - strFmt() = formatea texto
+// - %1, %2 = placeholders que se sustituyen por valores
+
+/// <summary>
+/// Ejercicio - Métodos y parámetros.
+/// Demuestra cómo crear métodos reutilizables y usarlos.
+/// </summary>
+class Dev_MethodsAndParameters
 {
+    /// <summary>
+    /// Suma dos números enteros.
+    /// </summary>
+    /// <param name="_a">Primer número</param>
+    /// <param name="_b">Segundo número</param>
+    /// <returns>Resultado de la suma</returns>
     private static int add(int _a, int _b)
     {
+        // Devuelve la suma de los dos parámetros
         return _a + _b;
     }
 
+    /// <summary>
+    /// Construye un mensaje con nombre y valor.
+    /// </summary>
+    /// <param name="_name">Nombre del usuario</param>
+    /// <param name="_value">Valor numérico</param>
+    /// <returns>Texto formateado</returns>
     private static str formatMessage(str _name, int _value)
     {
+        // strFmt sustituye %1 y %2 por los valores enviados
         return strFmt("Usuario %1 - Valor %2", _name, _value);
     }
 
     public static void main(Args _args)
     {
-        int total = Dev06_MethodsAndParameters::add(10, 20);
-        info(Dev06_MethodsAndParameters::formatMessage("Admin", total));
+        // Llamamos al método add usando ::
+        int total = Dev_MethodsAndParameters::add(10, 20);
+
+        // Mostramos el resultado usando otro método
+        info(Dev_MethodsAndParameters::formatMessage("Admin", total));
     }
 }

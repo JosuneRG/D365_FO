@@ -1,0 +1,26 @@
+// Qué tienes que entender:
+// - update_recordset = actualización masiva
+// - es más eficiente que actualizar fila por fila
+// - setting = campo que quieres actualizar
+
+/// <summary>
+/// Ejercicio 05 - Update recordset.
+/// Incrementa el crédito de clientes con crédito mayor que 0.
+/// </summary>
+class Dev05_UpdateRecordset
+{
+    public static void main(Args _args)
+    {
+        CustTable custTable;
+
+        ttsBegin;
+
+        update_recordset custTable
+            setting CreditMax = custTable.CreditMax + 1000
+            where custTable.CreditMax > 0;
+
+        ttsCommit;
+
+        info("Actualización masiva completada");
+    }
+}

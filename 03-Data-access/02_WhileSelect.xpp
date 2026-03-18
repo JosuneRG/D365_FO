@@ -1,0 +1,25 @@
+// Qué tienes que entender:
+// - while select = recorre varios registros
+// - where = filtro de la consulta
+// - cada vuelta del while carga un registro en el buffer
+
+/// <summary>
+/// Ejercicio 02 - While select.
+/// Recorre clientes no bloqueados.
+/// </summary>
+class Dev02_WhileSelect
+{
+    public static void main(Args _args)
+    {
+        CustTable custTable;
+
+        // Recorremos todos los clientes no bloqueados
+        while select custTable
+            where custTable.Blocked == CustVendorBlocked::No
+        {
+            info(strFmt("Cuenta: %1 | Nombre: %2",
+                custTable.AccountNum,
+                custTable.name()));
+        }
+    }
+}

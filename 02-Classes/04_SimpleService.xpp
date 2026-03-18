@@ -1,25 +1,52 @@
+// Qué tienes que entender:
+// - service class = clase que agrupa lógica de negocio
+// - validate = validar datos antes de procesar
+// - separar lógica en clases ayuda a mantener el código limpio
+
+/// <summary>
+/// Servicio simple de ejemplo.
+/// </summary>
 class DevCustomerService
 {
-    public boolean validateCreditLimit(AmountCur _creditMax)
+    /// <summary>
+    /// Valida que el crédito no sea negativo.
+    /// </summary>
+    /// <param name="_creditMax">Crédito máximo</param>
+    /// <returns>True si es válido</returns>
+    public boolean validateCredit(AmountCur _creditMax)
     {
         return _creditMax >= 0;
     }
 
+    /// <summary>
+    /// Devuelve un resumen del cliente.
+    /// </summary>
+    /// <param name="_account">Cuenta</param>
+    /// <param name="_name">Nombre</param>
+    /// <param name="_creditMax">Crédito</param>
+    /// <returns>Texto resumen</returns>
     public str buildSummary(CustAccount _account, Name _name, AmountCur _creditMax)
     {
         return strFmt("Cuenta=%1 | Nombre=%2 | Crédito=%3", _account, _name, _creditMax);
     }
 }
 
-class Dev10_SimpleService
+/// <summary>
+/// Clase runnable para probar el servicio.
+/// </summary>
+class Dev04_SimpleService
 {
     public static void main(Args _args)
     {
         DevCustomerService service = new DevCustomerService();
 
-        if (service.validateCreditLimit(10000))
+        if (service.validateCredit(1000))
         {
-            info(service.buildSummary("US-020", "Litware", 10000));
+            info(service.buildSummary("US-004", "Adventure Works", 1000));
+        }
+        else
+        {
+            warning("Crédito inválido");
         }
     }
 }

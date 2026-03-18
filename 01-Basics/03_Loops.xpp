@@ -1,18 +1,41 @@
-class Dev03_Loops
+// Qué tienes que entender:
+// - for = bucle con contador (sabes cuántas veces se ejecuta)
+// - while = bucle mientras se cumpla condición
+// - i++ = incrementa la variable en 1 (i = i + 1)
+// - info() = muestra mensaje en pantalla (Infolog)
+// - strFmt() = formatea texto
+// - %1 = placeholder que se sustituye por el valor
+// - List = colección dinámica (array flexible)
+// - Types::String = tipo de dato de la lista
+// - Enumerator = sirve para recorrer la lista
+
+/// <summary>
+/// Ejercicio 03 - Bucles y colecciones.
+/// Demuestra for, while y uso de List.
+/// </summary>
+class Dev_Loops
 {
     public static void main(Args _args)
     {
         int i;
 
+        // FOR → se usa cuando sabes cuántas veces quieres repetir algo
         for (i = 1; i <= 5; i++)
         {
+            // strFmt sustituye %1 por el valor de i
             info(strFmt("For loop: %1", i));
         }
 
+        // Reiniciamos la variable
         i = 1;
+
+        // WHILE → se usa cuando depende de una condición
         while (i <= 3)
         {
             info(strFmt("While loop: %1", i));
+
+            // MUY IMPORTANTE:
+            // Si no incrementas i, el bucle sería infinito
             i++;
         }
     }

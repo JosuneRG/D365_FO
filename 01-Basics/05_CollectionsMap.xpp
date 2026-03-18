@@ -1,18 +1,47 @@
-class Dev05_CollectionsMap
+// Qué tienes que entender:
+// - Map = colección clave → valor (como diccionario)
+// - Types::String = tipo de la clave (key)
+// - Types::Integer = tipo del valor (value)
+// - insert() = añade una pareja clave/valor
+// - MapEnumerator = objeto para recorrer el Map
+// - getEnumerator() = obtiene el enumerador
+// - moveNext() = avanza al siguiente elemento
+// - currentKey() = devuelve la clave actual
+// - currentValue() = devuelve el valor actual
+// - strFmt() = formatea texto
+// - %% = muestra el símbolo % (hay que duplicarlo)
+
+/// <summary>
+/// Ejercicio - Uso de Map y MapEnumerator.
+/// Crea un mapa de descuentos por grupo y los recorre.
+/// </summary>
+class Dev_CollectionsMap
 {
     public static void main(Args _args)
     {
+        // Creamos un Map:
+        // clave = string (grupo cliente)
+        // valor = integer (porcentaje descuento)
         Map discountMap = new Map(Types::String, Types::Integer);
+
+        // Declaramos enumerador
         MapEnumerator me;
 
+        // Insertamos valores (clave → valor)
         discountMap.insert("RETAIL", 5);
         discountMap.insert("WHOLESALE", 12);
 
+        // Obtenemos el enumerador del Map
         me = discountMap.getEnumerator();
 
+        // Recorremos el Map
         while (me.moveNext())
         {
-            info(strFmt("Grupo: %1 | Descuento: %2%%", me.currentKey(), me.currentValue()));
+            // currentKey() = clave
+            // currentValue() = valor
+            info(strFmt("Grupo: %1 | Descuento: %2%%",
+                me.currentKey(),
+                me.currentValue()));
         }
     }
 }

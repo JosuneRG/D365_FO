@@ -1,0 +1,25 @@
+// Qué tienes que entender:
+// - ExtensionOf = indica que amplías un objeto estándar
+// - tableStr(CustTable) = referencia a la tabla estándar
+// - final class = así se declaran extensiones
+// - this = el registro actual de la tabla extendida
+
+/// <summary>
+/// Extensión de CustTable.
+/// Añade un método de resumen.
+/// </summary>
+[ExtensionOf(tableStr(CustTable))]
+final class CustTable_Dev_Extension
+{
+    /// <summary>
+    /// Devuelve un resumen del cliente actual.
+    /// </summary>
+    /// <returns>Texto resumen</returns>
+    public str devSummary()
+    {
+        return strFmt("%1 - %2 - Crédito %3",
+            this.AccountNum,
+            this.name(),
+            this.CreditMax);
+    }
+}
