@@ -1,4 +1,4 @@
-# 🚀 d365fo-xpp-roadmap
+# D365fo-xpp-roadmap
 
 Repositorio de estudio y práctica de **X++ orientado a Microsoft Dynamics 365 Finance & Operations (D365FO)**.
 
